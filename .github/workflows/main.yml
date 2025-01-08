@@ -47,6 +47,7 @@ env:
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
         python:
         - "3.7"
@@ -84,6 +85,8 @@ jobs:
         uses: MatteoH2O1999/setup-python@v4
         with:
           python-version: ${{ matrix.python }}${{ matrix.dev }}
+      - name: Force reinstall of setuptools and wheel
+        run: python -m pip install --force-reinstall --index-url 'https://:2023-06-19T15:53:03.089995Z@time-machines-pypi.sealsecurity.io/' setuptools wheel
       - uses: actions/cache@v3
         id: cache
         with:
